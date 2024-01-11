@@ -1,13 +1,15 @@
-##user_table
+##users_table
 
 
-| Column  | Type   | Options    |
-| ------- | ------ | ---------- |
-|nickname |string  | null: false|
-|email    |string  | null: false|
-|password |string  | null: false|
-|name     |string  | null: false|
-|birthday |string  | null: false|
+| Column            | Type    | Options                 |
+| ----------------- | ------- | ----------------------- |
+|nickname           |string   | null: false             |
+|email              |string   | null: false unique: true|
+|encrypted_password |string   | null: false             |
+|name               |string   | null: false             |
+|birthday           |date     | null: false             |
+|name kana          |string   | null: false             |
+|name kanji         |string   | null: false             |
 
 ###Association
 
@@ -49,13 +51,9 @@ has_one :profile
 
 |Column|Type|Options|
 | -------------- | ---- | --------- |
-|post code       |number|null: false|
+|post code       |string|null: false|
 |prefectures     |string|null: false|
 |municipalities  |string|null: false|
-|street address  |number|null: false|
-|building name   |string|null: false|
-|telephone number|number|null: false|
-
-##Association
-
-belongs_to :user
+|street address  |string|null: false|
+|building name   |string|           |
+|telephone number|string|null: false|
