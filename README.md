@@ -1,24 +1,24 @@
-| Column  | Type   | Options    |
-| ------- | ------ | ---------- |
-|nickname |string  | null: false|
-|email    |string  | null: false|
-|password |string  | null: false|
-|name     |string  | null: false|
-|birthday |string  | null: false|
+# README
 
-belongs_to :user
- 
-| Column                        | Type        | Options    |
-| ----------------------------- | ----------- | ---------- |
-| product image                 |references   |            |
-| product name                  |string       |            |
-| product description           |text         |            |
-| category                      |references   |            |
-| product condition             |references   |            |
-| shipping burden               |references   |            |
-| resion of origin              |references   |            |
-| number of days until shipping |references   |            |
-| price                         |string       |            |
-| seller                        |string       |            |
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-has_many :messages
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
