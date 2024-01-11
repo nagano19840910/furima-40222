@@ -16,7 +16,7 @@ belongs_to :user
 | category                      |references   |            |
 | product condition             |references   |            |
 | shipping burden               |references   |            |
-| resion of origin              |references   |            |
+| region of origin              |references   |            |
 | number of days until shipping |references   |            |
 | price                         |string       |            |
 | seller                        |string       |            |
