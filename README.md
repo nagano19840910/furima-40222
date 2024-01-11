@@ -35,7 +35,7 @@ belongs_to :user
 
 has_many :messages
 
-##purchase_table
+##purchases_table
 
 |Column          |Type  |Options    |
 | -------------- | ---- | --------- |
