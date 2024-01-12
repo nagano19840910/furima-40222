@@ -15,10 +15,10 @@
 ###Association
 
 has_many :items
-has_many :purchase
+has_many :purchases
 
 
-##items_table
+##items_table_foreign_key_user_id
  
 | Column                           | Type         | Options                     |
 | -------------------------------- | ------------ | --------------------------- |
@@ -27,14 +27,14 @@ has_many :purchase
 | category_id                      |integer       |                             |
 | product_condition_id             |integer       |                             |
 | shipping_burden_id               |integer       |                             |
-| number_of_days_until_shipping_id |integer       |                             |
+| shipping_days                    |integer       |                             |
 | price                            |integer       |                             |
 | person_exhibiting                |references    |null: false foreign_key: true|
 | prefecture_id                    |integer       |null: false                  |
 
 ###Association
 
-has_many :purchases
+has_one :purchase
 belongs_to :user
 
 ##purchases_table
@@ -46,11 +46,11 @@ belongs_to :user
  
 ##Association
 
-has_one :shippings_addresses_table
+has_one :shipping_addresses_table
 belongs_to :user
 belongs_to :item
 
-##shippings_addresses_table
+##shipping_addresses_table
 
 |Column|Type|Options|
 | -------------- | -------- | --------------------------- |
