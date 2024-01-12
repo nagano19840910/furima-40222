@@ -15,22 +15,22 @@
 ###Association
 
 has_many :items
-has_many :purchases
+has_many :purchase
 
 
 ##items_table
  
-| Column                           | Type        | Options                     |
-| -------------------------------- | ----------- | --------------------------- |
-| product_name                     |string       |                             |
-| product_description              |text         |                             |
-| category_id                      |integer      |                             |
-| product_condition_id             |integer      |                             |
-| shipping_burden_id               |integer      |                             |
-| number_of_days_until_shipping_id |integer      |                             |
-| price                            |integer      |                             |
-| seller                           |reference    |null: false foreign_key: true|
-| prefecture                       |string       |null: false                  |
+| Column                           | Type         | Options                     |
+| -------------------------------- | ------------ | --------------------------- |
+| product_name                     |string        |                             |
+| product_description              |text          |                             |
+| category_id                      |integer       |                             |
+| product_condition_id             |integer       |                             |
+| shipping_burden_id               |integer       |                             |
+| number_of_days_until_shipping_id |integer       |                             |
+| price                            |integer       |                             |
+| person_exhibiting                |references    |null: false foreign_key: true|
+| prefecture_id                    |integer       |null: false                  |
 
 ###Association
 
@@ -39,23 +39,23 @@ belongs_to :user
 
 ##purchases_table
 
-|Column          |Type     |Options                      |
-| -------------- | ------- | --------------------------- |
-|user            |reference|null: false foreign_key: true|
-|item            |reference|null: false foreign_key: true|
+|Column          |Type      |Options                      |
+| -------------- | -------- | --------------------------- |
+|user            |references|null: false foreign_key: true|
+|item            |references|null: false foreign_key: true|
  
 ##Association
 
-has_one :shippings_address
+has_one :shippings_addresses_table
 belongs_to :user
 belongs_to :item
 
-##shippings_address_tables
+##shippings_addresses_table
 
 |Column|Type|Options|
 | -------------- | -------- | --------------------------- |
 |post_code       |string    |null: false                  |
-|prefectures     |string    |null: false                  |
+|prefectures_id  |integer   |null: false                  |
 |municipalities  |string    |null: false                  |
 |street_address  |string    |null: false                  |
 |building_name   |string    |                             |
