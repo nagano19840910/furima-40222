@@ -15,6 +15,8 @@
 ###Association
 
 has_many :items
+has_many :purchases
+
 
 ##items_table
  
@@ -34,27 +36,32 @@ has_many :items
 
 has_many :purchases_table
 has_many :item_image
+belongs_to :user
 
 ##purchases_table
 
 |Column          |Type  |Options                      |
 | -------------- | ---- | --------------------------- |
-|user            |string|null: false                  |
+|user            |string|null: false foreign_key: true|
 |item            |string|null: false foreign_key: true|
  
 ##Association
 
 has_one :shippings_address_tables
-belongs_to :shippings_address_table
+belongs_to :user
+belongs_to :item
 
 ##shippings_address_tables
 
 |Column|Type|Options|
-| -------------- | ----- | --------------- |
-|post_code       |string |null: false      |
-|prefectures     |string |null: false      |
-|municipalities  |string |null: false      |
-|street_address  |string |null: false      |
-|building_name   |string |                 |
-|telephone_number|string |null: false      |
-|purchaser       |integer|foreign_key: true|
+| -------------- | ------- | --------------- |
+|post_code       |string   |null: false      |
+|prefectures     |string   |null: false      |
+|municipalities  |string   |null: false      |
+|street_address  |string   |null: false      |
+|building_name   |string   |                 |
+|telephone_number|string   |null: false      |
+|purchase        |reference|foreign_key: true|
+
+##Association
+belongs_to :purchase
