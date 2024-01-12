@@ -27,9 +27,9 @@ has_many :purchases
 | category_id                      |integer       |                             |
 | product_condition_id             |integer       |                             |
 | shipping_burden_id               |integer       |                             |
-| shipping_days                    |integer       |                             |
+| shipping_day_id                  |integer       |                             |
 | price                            |integer       |                             |
-| person_exhibiting                |references    |null: false foreign_key: true|
+| user                             |references    |null: false foreign_key: true|
 | prefecture_id                    |integer       |null: false                  |
 
 ###Association
@@ -46,11 +46,11 @@ belongs_to :user
  
 ##Association
 
-has_one :shipping_addresses_table
+has_one :shipping_address
 belongs_to :user
 belongs_to :item
 
-##shipping_addresses_table
+##shipping_address
 
 |Column|Type|Options|
 | -------------- | -------- | --------------------------- |
