@@ -1,24 +1,66 @@
-# README
+##users_table
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+| Column                    | Type    | Options                 |
+| ------------------------- | ------- | ----------------------- |
+|email                      |string   | null: false unique: true|
+|encrypted_password         |string   | null: false             |
+|last_name                  |string   | null: false             |
+|first_name                 |string   | null: false             |
+|birthday                   |date     | null: false             |
+|last_name_hurigana         |string   | null: false             |
+|first_name_hurigana        |string   | null: false             |
+|nickname                   |string   | null: false             |
 
-* Ruby version
+###Association
 
-* System dependencies
+has_many :items
+has_many :purchases
 
-* Configuration
 
-* Database creation
+##items_table
+ 
+| Column                           | Type         | Options                     |
+| -------------------------------- | ------------ | --------------------------- |
+| product_name                     |string        |                             |
+| product_description              |text          |                             |
+| category_id                      |integer       |                             |
+| product_condition_id             |integer       |                             |
+| shipping_burden_id               |integer       |                             |
+| shipping_day_id                  |integer       |                             |
+| price                            |integer       |                             |
+| user                             |references    |null: false foreign_key: true|
+| prefecture_id                    |integer       |null: false                  |
 
-* Database initialization
+###Association
 
-* How to run the test suite
+has_one :purchase
+belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
+##purchases_table
 
-* Deployment instructions
+|Column          |Type      |Options                      |
+| -------------- | -------- | --------------------------- |
+|user            |references|null: false foreign_key: true|
+|item            |references|null: false foreign_key: true|
+ 
+##Association
 
-* ...
+has_one :shipping_address
+belongs_to :user
+belongs_to :item
+
+##shipping_address
+
+|Column|Type|Options|
+| -------------- | -------- | --------------------------- |
+|post_code       |string    |null: false                  |
+|prefecture_id  |integer   |null: false                  |
+|municipalities  |string    |null: false                  |
+|street_address  |string    |null: false                  |
+|building_name   |string    |                             |
+|telephone_number|string    |null: false                  |
+|purchase        |references|null: false foreign_key: true|
+
+##Association
+belongs_to :purchase
