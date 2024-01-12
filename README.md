@@ -1,58 +1,60 @@
 ##users_table
 
 
-| Column            | Type    | Options                 |
-| ----------------- | ------- | ----------------------- |
-|email              |string   | null: false unique: true|
-|encrypted_password |string   | null: false             |
-|sex                |string   | null: false             |
-|given_name         |string   | null: false             |
-|birthday           |date     | null: false             |
-|sexual_kana        |string   | null: false             |
-|name_kana          |string   | null: false             |
+| Column                    | Type    | Options                 |
+| ------------------------- | ------- | ----------------------- |
+|email                      |string   | null: false unique: true|
+|encrypted_password         |string   | null: false             |
+|last_name                  |string   | null: false             |
+|first_name                 |string   | null: false             |
+|birthday                   |date     | null: false             |
+|last_name_hurigana         |string   | null: false             |
+|first_name_hurigana        |string   | null: false             |
+|nickname                   |string   | null: false             |
 
 ###Association
 
-belongs_to :items
+has_many :items
 
 ##items_table
  
-| Column                        | Type        | Options    |
-| ----------------------------- | ----------- | ---------- |
-| product_image                 |references   |            |
-| product_name                  |string       |            |
-| product_description           |text         |            |
-| category                      |references   |            |
-| product_condition             |references   |            |
-| shipping_burden               |references   |            |
-| number_of_days_until_shipping |references   |            |
-| price                         |string       |            |
-| seller                        |string       |            |
-| prefectures                   |string       |            |
+| Column                           | Type        | Options            |
+| -------------------------------- | ----------- | ------------------ |
+| product_name                     |string       |                    |
+| product_description_id           |integer      |                    |
+| category_id                      |integer      |                    |
+| product_condition_id             |integer      |                    |
+| shipping_burden_id               |integer      |                    |
+| number_of_days_until_shipping_id |integer      |                    |
+| price                            |integer      |                    |
+| seller                           |string       |foreign_key: user_id|
+| prefectures                      |string       |                    |
 
 ###Association
 
 has_many :purchases_table
-has_many :merchandise_image
+has_many :item_image
 
 ##purchases_table
 
 |Column          |Type  |Options                      |
 | -------------- | ---- | --------------------------- |
 |user            |string|null: false                  |
-|merchandise     |string|null: false foreign_key: true|
+|item            |string|null: false foreign_key: true|
  
 ##Association
 
-has_one :shippings_address_table
+has_one :shippings_address_tables
+belongs_to :shippings_address_table
 
-##shippings_address_table
+##shippings_address_tables
 
 |Column|Type|Options|
-| -------------- | ---- | --------- |
-|post_code       |string|null: false|
-|prefectures     |string|null: false|
-|municipalities  |string|null: false|
-|street_address  |string|null: false|
-|building_name   |string|           |
-|telephone_number|string|null: false|
+| -------------- | ----- | --------------- |
+|post_code       |string |null: false      |
+|prefectures     |string |null: false      |
+|municipalities  |string |null: false      |
+|street_address  |string |null: false      |
+|building_name   |string |                 |
+|telephone_number|string |null: false      |
+|purchaser       |integer|foreign_key: true|
