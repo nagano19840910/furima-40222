@@ -33,13 +33,14 @@ belongs_to :items
 ###Association
 
 has_many :purchases_table
+has_many :merchandise_image
 
 ##purchases_table
 
-|Column          |Type  |Options    |
-| -------------- | ---- | --------- |
-|user            |string|null: false|
-|merchandise     |string|null: false|
+|Column          |Type  |Options                      |
+| -------------- | ---- | --------------------------- |
+|user            |string|null: false                  |
+|merchandise     |string|null: false foreign_key: true|
  
 ##Association
 
