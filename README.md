@@ -3,57 +3,55 @@
 
 | Column            | Type    | Options                 |
 | ----------------- | ------- | ----------------------- |
-|nickname           |string   | null: false             |
 |email              |string   | null: false unique: true|
 |encrypted_password |string   | null: false             |
-|name               |string   | null: false             |
+|sex                |string   | null: false             |
+|given_name         |string   | null: false             |
 |birthday           |date     | null: false             |
-|name kana          |string   | null: false             |
-|name kanji         |string   | null: false             |
+|sexual_kana        |string   | null: false             |
+|name_kana          |string   | null: false             |
 
 ###Association
 
-belongs_to :user
+belongs_to :items
 
 ##items_table
  
 | Column                        | Type        | Options    |
 | ----------------------------- | ----------- | ---------- |
-| product image                 |references   |            |
-| product name                  |string       |            |
-| product description           |text         |            |
+| product_image                 |references   |            |
+| product_name                  |string       |            |
+| product_description           |text         |            |
 | category                      |references   |            |
-| product condition             |references   |            |
-| shipping burden               |references   |            |
-| region of origin              |references   |            |
-| number of days until shipping |references   |            |
+| product_condition             |references   |            |
+| shipping_burden               |references   |            |
+| number_of_days_until_shipping |references   |            |
 | price                         |string       |            |
 | seller                        |string       |            |
-
+| prefectures                   |string       |            |
 
 ###Association
 
-has_many :messages
+has_many :purchases_table
 
 ##purchases_table
 
 |Column          |Type  |Options    |
 | -------------- | ---- | --------- |
-|card information|number|null: false|
-|date of expiry  |number|null: false|
-|security code   |number|null: false|
-
+|user            |string|null: false|
+|merchandise     |string|null: false|
+ 
 ##Association
 
-has_one :profile
+has_one :shippings_address_table
 
-##shipping_address_table
+##shippings_address_table
 
 |Column|Type|Options|
 | -------------- | ---- | --------- |
-|post code       |string|null: false|
+|post_code       |string|null: false|
 |prefectures     |string|null: false|
 |municipalities  |string|null: false|
-|street address  |string|null: false|
-|building name   |string|           |
-|telephone number|string|null: false|
+|street_address  |string|null: false|
+|building_name   |string|           |
+|telephone_number|string|null: false|
