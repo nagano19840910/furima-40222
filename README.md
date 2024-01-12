@@ -18,7 +18,7 @@ has_many :items
 has_many :purchases
 
 
-##items_table_foreign_key_user_id
+##items_table
  
 | Column                           | Type         | Options                     |
 | -------------------------------- | ------------ | --------------------------- |
@@ -55,7 +55,7 @@ belongs_to :item
 |Column|Type|Options|
 | -------------- | -------- | --------------------------- |
 |post_code       |string    |null: false                  |
-|prefectures_id  |integer   |null: false                  |
+|prefecture_id  |integer   |null: false                  |
 |municipalities  |string    |null: false                  |
 |street_address  |string    |null: false                  |
 |building_name   |string    |                             |
