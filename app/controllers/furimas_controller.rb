@@ -18,6 +18,10 @@ class FurimasController < ApplicationController
     redirect_to root_path
   end
 
+  def message_params
+    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
+  end
+
   private
   def furima_params
     params.require(:furima).permit(:name, :image, :text)
