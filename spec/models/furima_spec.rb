@@ -15,44 +15,49 @@ end
 
   context"商品を出品できない場合" do
     it '画像が空では登録できない' do
-      @furima.image = ''
+      @furima.image = nil
       @furima.valid?
       expect(@furima.errors.full_messages).to include "Image can't be blank"
     end
     it '商品名が空では登録できない' do
       @furima.product_name = ''
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Name can't be blank"
+      expect(@furima.errors.full_messages).to include "Product name can't be blank"
     end
     it '商品の説明が空では登録できない' do
       @furima.product_description = ''
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Info can't be blank"
+      expect(@furima.errors.full_messages).to include "Product description can't be blank"
     end
     it 'カテゴリーが空では登録できない' do
-      @furima.category = ''
+      @furima.category_id = 1
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Category can't be blank"
+      expect(@furima.errors.full_messages).to include "Category must be other than 1"
     end
     it '商品の状態が空では登録できない' do
-      @furima.product_condition = ''
+      @furima.product_condition_id = 1
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Sales status can't be blank"
+      expect(@furima.errors.full_messages).to include "Product condition must be other than 1"
     end
     it '配送料の負担が空では登録できない' do
-      @furima.shipping_burden = ''
+      @furima.shipping_burden_id = 1
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Shipping fee status can't be blank"
-    end
+      expect(@furima.errors.full_messages).to include "Shipping burden must be other than 1"
+    end 
     it '発送元の地域が空では登録できない' do
-      @furima.prefecture = ''
+      @furima.prefecture_id = 1
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Prefecture can't be blank"
+      expect(@furima.errors.full_messages).to include "Prefecture must be other than 1"
     end
     it '発送までの日数が空では登録できない' do
-      @furima.shipping_day = ''
+      @furima.shipping_day_id = 1
       @furima.valid?
-      expect(@furima.errors.full_messages).to include "Scheduled delivery can't be blank"
+      expect(@furima.errors.full_messages).to include "Shipping day must be other than 1"
     end
+    it '販売価格が空では登録できない' do
+      @furima.price = ''
+      @furima.valid?
+      expect(@furima.errors.full_messages).to include "Price is not a number"
+    end
+    end      
   end
-end

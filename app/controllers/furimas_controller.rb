@@ -15,7 +15,6 @@ class FurimasController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-    calculate_fee_and_profit if @furima.valid?
   end
 
   def destroy
