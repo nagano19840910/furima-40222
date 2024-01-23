@@ -1,15 +1,21 @@
 class FurimasController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   def index
     @furimas = Furima.all
   end
 
   def new
-    @furimas = Furima.new
+    @furima = Furima.new
   end
 
   def create
-    Furima.create(furima_params)
-    redirect_to '/'
+    @furima = Furima.new(furima_params)
+    if @furima.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+    calculate_fee_and_profit if @furima.valid?
   end
 
   def destroy
@@ -24,7 +30,7 @@ class FurimasController < ApplicationController
 
   private
   def furima_params
-    params.require(:furima).permit(:name, :image, :text)
+    params.require(:furima).permit(:image, :category_id, :product_condition_id, :shipping_burden_id, :shipping_day_id, :prefecture_id, :product_name, :product_description, :price).merge(user_id: current_user.id)
   end
 
 end
