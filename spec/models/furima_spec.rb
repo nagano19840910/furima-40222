@@ -59,5 +59,25 @@ end
       @furima.valid?
       expect(@furima.errors.full_messages).to include "Price is not a number"
     end
+    it '半角数字以外の値が含まれている場合は保存できないこと' do
+      @furima.price = 'abc'
+      @furima.valid?
+      expect(@furima.errors.full_messages).to include 'Price is not a number'
+    end
+    it '300未満の値では保存できないこと' do
+      @furima.price = 299
+      @furima.valid?
+      expect(@furima.errors.full_messages).to include "Price must be greater than or equal to 300"
+    end
+    it '10000000以上の値では保存できないこと' do
+      @furima.price = 10000000
+      @furima.valid?
+      expect(@furima.errors.full_messages).to include "Price must be less than or equal to 9999999"
+    end
+    it 'userが空では登録できない' do
+      @furima.user = nil
+      @furima.valid?
+      expect(@furima.errors.full_messages).to include "User must exist"
     end      
   end
+end

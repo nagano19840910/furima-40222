@@ -18,19 +18,19 @@ function calculateFeeAndProfit() {
   }
 
   
-  const fee = price * 0.1;
+  const fee = Math.floor(price * 0.1);
 
   
-  const salesProfit = price - fee;
+  const salesProfit = Math.floor(price - fee);
 
   
-  addTaxPrice.textContent = fee.toFixed(0);
-  profit.textContent = salesProfit.toFixed(0);
+  addTaxPrice.textContent = fee.toString();
+  profit.textContent = salesProfit.toString();
 }
 
 
 document.addEventListener('turbo:render', () => {
-  console.log("OK");
+
 
   
   document.getElementById("item-price").addEventListener("input", calculateFeeAndProfit);
@@ -38,7 +38,7 @@ document.addEventListener('turbo:render', () => {
 
 
 document.addEventListener('turbo:load', () => {
-  console.log("OK");
+
 
   
   document.getElementById("item-price").addEventListener("input", calculateFeeAndProfit);
