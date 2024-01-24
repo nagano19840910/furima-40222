@@ -17,4 +17,5 @@ class User < ApplicationRecord
     validates :last_name_hurigana
     validates :first_name_hurigana
   end
+  has_many :items
 end

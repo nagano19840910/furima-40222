@@ -84,3 +84,6 @@ group :production do
   gem 'pg'
 end
 gem 'devise'
+gem 'activestorage'
+gem 'active_hash'
+gem 'pry-rails'

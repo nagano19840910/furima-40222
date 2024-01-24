@@ -55,7 +55,7 @@ belongs_to :item
 |Column|Type|Options|
 | -------------- | -------- | --------------------------- |
 |post_code       |string    |null: false                  |
-|prefecture_id  |integer   |null: false                  |
+|prefecture_id   |integer   |null: false                  |
 |municipalities  |string    |null: false                  |
 |street_address  |string    |null: false                  |
 |building_name   |string    |                             |
