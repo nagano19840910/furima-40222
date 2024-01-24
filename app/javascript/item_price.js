@@ -26,20 +26,16 @@ function calculateFeeAndProfit() {
   
   addTaxPrice.textContent = fee.toString();
   profit.textContent = salesProfit.toString();
-}
 
-
-document.addEventListener('turbo:render', () => {
 
 
   
-  document.getElementById("item-price").addEventListener("input", calculateFeeAndProfit);
-});
-
-
-document.addEventListener('turbo:load', () => {
-
-
+  document.addEventListener('turbo:render', () => {
   
-  document.getElementById("item-price").addEventListener("input", calculateFeeAndProfit);
-});
+    priceInput.addEventListener("input", calculateFeeAndProfit);
+  });
+  
+  document.addEventListener('turbo:load', () => {
+  
+    priceInput.addEventListener("input", calculateFeeAndProfit);
+  });
