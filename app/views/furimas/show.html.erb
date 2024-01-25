@@ -4,7 +4,7 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= "商品名" %>
+      <%= @furima.product_name %>
     </h2>
     <div class="item-img-content">
       <%= image_tag @furima.image,class:"item-box-img" %>
@@ -19,7 +19,7 @@
         ¥<%= @furima.price %>
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= @furima.shipping_burden.name %>
       </span>
     </div>
 
@@ -40,7 +40,7 @@
   
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @furima.product_description  %></span>
     </div>
     <table class="detail-table">
       <tbody>
@@ -106,9 +106,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+  <a href="#" class="another-item"><%= @furima.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
