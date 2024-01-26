@@ -21,16 +21,13 @@ class FurimasController < ApplicationController
   end
 
   def show
-    @furima = Furima.find(params[:id])
   end
 
   def edit
-    @furima = Furima.find(params[:id])
     redirect_to root_path unless @furima.user == current_user
   end
 
   def update
-    @furima = Furima.find(params[:id])
   if @furima.update(furima_params)
     redirect_to furima_path(@furima), notice: '商品情報が更新されました。'
   else
