@@ -1,6 +1,6 @@
 class FurimasController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_furima, only: [:edit, :update]
+  before_action :set_furima, only: [:edit, :update, :show]
   before_action :require_login, only: [:edit, :update]
 
   def index
