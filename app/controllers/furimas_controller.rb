@@ -17,11 +17,6 @@ class FurimasController < ApplicationController
     end
   end
 
-  def destroy
-    furima.destroy
-    redirect_to root_path
-  end
-  
   def show
     @furima = Furima.find(params[:id])
   end
