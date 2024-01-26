@@ -17,14 +17,8 @@ class FurimasController < ApplicationController
     end
   end
 
-  def destroy
-    furima = Furima.find(params[:id])
-    furima.destroy
-    redirect_to root_path
-  end
-
-  def message_params
-    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
+  def show
+    @furima = Furima.find(params[:id])
   end
 
   private
