@@ -1,7 +1,7 @@
 class FurimasController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_furima, only: [:edit, :update, :show]
-  before_action :require_login, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_furima, only: [:edit, :update, :show, :destroy]
+  before_action :authorize_user, only: [:destroy, :edit]
 
   def index
     @furimas = Furima.order(created_at: :desc)
@@ -24,7 +24,6 @@ class FurimasController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless @furima.user == current_user
   end
 
   def update
@@ -35,6 +34,14 @@ class FurimasController < ApplicationController
   end
 end
 
+def destroy
+if @furima.destroy
+  redirect_to root_path
+else
+  redirect_to root_path 
+end
+end
+
 
   private
 
@@ -42,6 +49,9 @@ end
     @furima = Furima.find(params[:id])
   end
 
+  def authorize_user
+    redirect_to root_path, alert: '権限がありません。' unless @furima.user == current_user
+  end
  
   def furima_params
     params.require(:furima).permit(:image, :category_id, :product_condition_id, :shipping_burden_id, :shipping_day_id, :prefecture_id, :product_name, :product_description, :price).merge(user_id: current_user.id)
