@@ -1,5 +1,5 @@
 class FurimasController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_furima, only: [:edit, :update, :show]
   before_action :require_login, only: [:edit, :update]
 
@@ -42,10 +42,7 @@ end
     @furima = Furima.find(params[:id])
   end
 
-  def require_login
-    redirect_to new_user_session_path unless user_signed_in?
-  end
-  
+ 
   def furima_params
     params.require(:furima).permit(:image, :category_id, :product_condition_id, :shipping_burden_id, :shipping_day_id, :prefecture_id, :product_name, :product_description, :price).merge(user_id: current_user.id)
   end
