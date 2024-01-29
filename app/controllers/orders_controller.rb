@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
       :street_address,
       :building_name,
       :phone_number,
-      :furima_id,
+
       #:token
       ).merge(user_id: current_user.id, furima_id: @furima.id)
   end
