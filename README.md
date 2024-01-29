@@ -14,11 +14,11 @@
 
 ###Association
 
-has_many :items
+has_many :furimas
 has_many :purchases
 
 
-##items_table
+##furimas_table
  
 | Column                           | Type         | Options                     |
 | -------------------------------- | ------------ | --------------------------- |
@@ -42,13 +42,13 @@ belongs_to :user
 |Column          |Type      |Options                      |
 | -------------- | -------- | --------------------------- |
 |user            |references|null: false foreign_key: true|
-|item            |references|null: false foreign_key: true|
+|furima            |references|null: false foreign_key: true|
  
 ##Association
 
 has_one :shipping_address
 belongs_to :user
-belongs_to :item
+belongs_to :furima
 
 ##shipping_address
 
