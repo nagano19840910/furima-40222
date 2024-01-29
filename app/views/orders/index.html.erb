@@ -1,10 +1,10 @@
 <%= render "shared/second-header"%>
-
 <div class='transaction-contents'>
   <div class='transaction-main'>
     <h1 class='transaction-title-text'>
       購入内容の確認
     </h1>
+    
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
       <%= image_tag @furima.image, class: 'buy-item-img' %>
@@ -32,6 +32,9 @@
     <%# /支払額の表示 %>
 
 <%= form_with model: @order, url: furima_orders_path, id: 'charge-form', data: { turbo: false }, class: 'transaction-form-wrap', local: true do |f| %>
+
+ <%= render 'shared/error_messages', model: f.object %>
+
       <%# カード情報の入力 %>
 
     <div class='credit-card-form'>

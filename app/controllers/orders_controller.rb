@@ -23,6 +23,9 @@ class OrdersController < ApplicationController
       redirect_to root_path, notice: '購入が完了しました。'
     else
       # フォームデータが無効な場合の処理（例: エラーメッセージを表示するビューを描画）
+
+    flash.now[:alert] = @order.errors.full_messages.join(', ')
+
       render 'index'
     end
   end
