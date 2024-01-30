@@ -51,9 +51,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
-  private
-
   # ストロングパラメーターで許可するフォームデータのキーを指定
   def order_params
     params.require(:order).permit(
@@ -63,8 +60,11 @@ class OrdersController < ApplicationController
       :street_address,
       :building_name,
       :phone_number,
-
-      #:token
-      ).merge(user_id: current_user.id, furima_id: @furima.id)
+      :price,
+      ).merge(
+        token: params[:token],
+        user_id: current_user.id,
+        furima_id: (@furima.present? && @furima.id.present?) ? @furima.id : nil  
+      )
+    end
   end
-end
