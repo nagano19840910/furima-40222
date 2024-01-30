@@ -6,15 +6,14 @@ class Order
     validates :post_code, format: {with:/\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid.Enter it as follows (e.g. 123-4567)"}
     validates :municipalities, presence: true
     validates :street_address, presence: true
-    validates :phone_number, format: { with: /\A\d{10,11}/, message: "is invalid. Input only number" }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "is invalid. Input only number" }
     #validates :token
+    validates :prefecture_id
     validates :user_id
+
   end
 
-  with_options presence: true, { message: "can't be blank" } do
-  validates :prefecture_id
-  end
-end
+  
 
   def save
     purchase = Purchase.create(user_id:user_id, furima_id:furima_id)

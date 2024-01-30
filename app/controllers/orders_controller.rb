@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:purchase]
-  before_action :set_item, only: [:show, :purchase]
+  before_action :set_furima, only: [:show, :purchase]
   before_action :check_seller, only: [:purchase]
 
 
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   end
 
   def check_seller
-    if current_user == @item.user
+    if current_user == @furima.user
       redirect_to root_path, alert: '自身が出品した商品の購入はできません。'
     end
   end
