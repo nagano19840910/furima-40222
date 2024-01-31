@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
 
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     # フォームオブジェクト（Order）の新しいインスタンスを生成
     @furima = Furima.find(params[:furima_id])
     @order = Order.new
@@ -17,16 +18,19 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.valid?
+      pay_item
+
       # フォームデータが有効な場合はデータベースに保存
       @order.save
       # 保存が成功した場合のリダイレクトなど、適切な処理を実行
-      redirect_to root_path, notice: '購入が完了しました。'
+      return redirect_to root_path, notice: '購入が完了しました。'
     else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+
       # フォームデータが無効な場合の処理（例: エラーメッセージを表示するビューを描画）
 
     flash.now[:alert] = @order.errors.full_messages.join(', ')
-
-      render 'index'
+    render 'index', status: :unprocessable_entity
     end
   end
 
@@ -68,3 +72,11 @@ class OrdersController < ApplicationController
       )
     end
   end
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+    amount: @furima.price,  # 商品の値段
+     card: order_params[:token],    # カードトークン
+     currency: 'jpy'                 # 通貨の種類（日本円）
+   )
+end

@@ -1,3 +1,5 @@
+<%= include_gon %>
+
 <%= render "shared/second-header"%>
 <div class='transaction-contents'>
   <div class='transaction-main'>
@@ -36,7 +38,6 @@
  <%= render 'shared/error_messages', model: f.object %>
 
       <%# カード情報の入力 %>
-
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力

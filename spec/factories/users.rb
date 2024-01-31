@@ -9,5 +9,7 @@ FactoryBot.define do
     last_name_hurigana    {"スズキ"}
     first_name_hurigana   {"イチロウ"}
     birthday              {Faker::Date.birthday(min_age: 18, max_age: 65) }
+
+
   end
 end

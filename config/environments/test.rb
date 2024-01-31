@@ -10,7 +10,7 @@ Rails.application.configure do
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true
   config.cache_classes = true
-
+  config.active_storage.variant_processor = :mini_magick
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration
   # system, or in some way before deploying your code.
@@ -51,6 +51,8 @@ Rails.application.configure do
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
+  config.active_job.queue_adapter = :inline #追記
+
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
