@@ -55,9 +55,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_024443) do
   end
 
   create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "furima_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price"
+    t.index ["furima_id"], name: "index_orders_on_furima_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "purchases", charset: "utf8", force: :cascade do |t|
@@ -104,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_024443) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "furimas", "users"
+  add_foreign_key "orders", "furimas"
+  add_foreign_key "orders", "users"
   add_foreign_key "purchases", "furimas"
   add_foreign_key "purchases", "users"
   add_foreign_key "shipping_addresses", "purchases"

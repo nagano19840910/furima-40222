@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:purchase]
+  before_action :authenticate_user!, only: [:purchase, :index]
   before_action :set_furima, only: [:show, :purchase]
   before_action :check_seller, only: [:purchase]
 
@@ -7,22 +7,23 @@ class OrdersController < ApplicationController
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    # フォームオブジェクト（Order）の新しいインスタンスを生成
+
     @furima = Furima.find(params[:furima_id])
     @order = Order.new
+    if @furima.user.id == current_user.id || @furima.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def create
-    # フォームオブジェクト（Order）の新しいインスタンスを生成し、フォームからのデータを渡す
     @furima = Furima.find(params[:furima_id])
     @order = Order.new(order_params)
+
 
     if @order.valid?
       pay_item
 
-      # フォームデータが有効な場合はデータベースに保存
       @order.save
-      # 保存が成功した場合のリダイレクトなど、適切な処理を実行
       return redirect_to root_path, notice: '購入が完了しました。'
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -34,16 +35,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  def purchase
-    # 購入の実際の処理を記述（例: カードの認証、注文の確定など）
-    # ...
+  def show
+    @furima = Furima.find(params[:furima.id])
+  
+    if @furima.user == current_user
+      render 'show'
+    else
+      redirect_to root_path, alert: '出品者以外はこのページにアクセスできません。'
+    end
+  end
+  
 
-    # 購入が完了した場合、適切なリダイレクトやメッセージを表示
+  def purchase
     redirect_to root_path, notice: '購入が完了しました。'
   end
 
 
   private
+
 
   def set_furima
     @furima = Furima.find(params[:furima_id])
@@ -55,7 +64,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # ストロングパラメーターで許可するフォームデータのキーを指定
   def order_params
     params.require(:order).permit(
       :post_code,

@@ -13,6 +13,7 @@ class FurimasController < ApplicationController
 
   def create
     @furima = Furima.new(furima_params)
+
     if @furima.save
       redirect_to root_path
     else
@@ -24,6 +25,10 @@ class FurimasController < ApplicationController
   end
 
   def edit
+    if @furima.purchase.present?
+      redirect_to root_path
+    end
+
   end
 
   def update
