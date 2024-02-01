@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_21_062917) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_31_024443) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,12 +54,36 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_21_062917) do
     t.index ["user_id"], name: "index_furimas_on_user_id"
   end
 
-  create_table "products", charset: "utf8", force: :cascade do |t|
-    t.string "name"
-    t.integer "price"
-    t.text "description"
+  create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "furima_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
+    t.index ["furima_id"], name: "index_orders_on_furima_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "purchases", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "furima_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["furima_id"], name: "index_purchases_on_furima_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "shipping_addresses", charset: "utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.string "prefecture_id", null: false
+    t.string "municipalities", null: false
+    t.string "street_address", null: false
+    t.string "building_name", null: false
+    t.string "phone_number", null: false
+    t.bigint "purchase_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_shipping_addresses_on_purchase_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -76,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_21_062917) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -83,4 +108,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_21_062917) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "furimas", "users"
+  add_foreign_key "orders", "furimas"
+  add_foreign_key "orders", "users"
+  add_foreign_key "purchases", "furimas"
+  add_foreign_key "purchases", "users"
+  add_foreign_key "shipping_addresses", "purchases"
 end

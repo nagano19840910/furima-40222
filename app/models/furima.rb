@@ -1,6 +1,7 @@
 class Furima < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :purchase
   validates :category_id, numericality: { other_than: 1 }
   validates :product_condition_id, numericality: { other_than: 1 }
   validates :shipping_burden_id, numericality: { other_than: 1 }
@@ -17,6 +18,4 @@ class Furima < ApplicationRecord
   belongs_to :shipping_burden
   belongs_to :shipping_day
   belongs_to :prefecture
-
-  
-end
+ end
