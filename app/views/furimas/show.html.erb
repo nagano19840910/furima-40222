@@ -31,7 +31,7 @@
   <% end %>
   
   <% if user_signed_in? && current_user.id != @furima.user.id && @furima.purchase.blank?%>
-    <%= link_to "購入画面に進む", furima_orders_path(@furima), class: "item-red-btn",data:{turbo: false} %>
+<%= link_to "購入画面に進む",furima_orders_path(@furima), data: { turbo: false }, class:"item-red-btn"%> 
   <% end %>
 
 
