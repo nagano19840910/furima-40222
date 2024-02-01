@@ -28,7 +28,6 @@ class OrdersController < ApplicationController
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
 
-      # フォームデータが無効な場合の処理（例: エラーメッセージを表示するビューを描画）
 
     flash.now[:alert] = @order.errors.full_messages.join(', ')
     render 'index', status: :unprocessable_entity
