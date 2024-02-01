@@ -72,6 +72,12 @@ describe '寄付情報の保存' do
       @order.valid?
       expect(@order.errors.full_messages).to include("Token can't be blank")
     end
+    it "itemが紐づいてないと保存できないこと" do
+      @order.furima_id = nil
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Furima can't be blank")
+    end
+
 
     
 

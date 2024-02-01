@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:purchase, :index]
-  before_action :set_furima, only: [:show, :purchase]
-  before_action :check_seller, only: [:purchase]
+  before_action :authenticate_user!, only: [ :index]
+  before_action :set_furima, only: [:index]
 
 
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-
-    @furima = Furima.find(params[:furima_id])
     @order = Order.new
     if @furima.user.id == current_user.id || @furima.purchase.present?
       redirect_to root_path
@@ -33,22 +30,6 @@ class OrdersController < ApplicationController
     render 'index', status: :unprocessable_entity
     end
   end
-
-  def show
-    @furima = Furima.find(params[:furima.id])
-  
-    if @furima.user == current_user
-      render 'show'
-    else
-      redirect_to root_path, alert: '出品者以外はこのページにアクセスできません。'
-    end
-  end
-  
-
-  def purchase
-    redirect_to root_path, notice: '購入が完了しました。'
-  end
-
 
   private
 
