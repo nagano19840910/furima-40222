@@ -20,5 +20,8 @@ module Furima40222
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.middleware.use Rack::Auth::Basic do |username, password|
+      username == 'admin' && password == '2222'
+    end
   end
 end
